@@ -1,0 +1,40 @@
+@startuml
+actor Visiteur
+boundary Vue
+control Controlleur
+entity Modele
+
+Visiteur->Vue:SaisirInfo()
+Activate Vue
+Vue->Vue:VerifierInfos()
+Vue->Controlleur:EnvoyerInfo()
+Activate Controlleur
+Controlleur->Modele:EnvoyerInfo(String s)
+Activate Modele
+Modele->Modele:VerifierInfos()
+Modele-->Controlleur:Afficher()
+alt Echec
+Controlleur->Vue:MessageErreur()
+create ErreurAuth
+ErreurAuth<-Vue:new
+Activate ErreurAuth
+ErreurAuth<-Vue:AfficherErreur()
+ErreurAuth->Visiteur:ResaisirInfo()
+deactivate ErreurAuth
+end
+alt Succès
+Activate Controlleur
+Controlleur->Vue:Compte()
+alt stagiaire
+create EspaceStagiaire
+Vue->EspaceStagiaire:Infos Stagiaire
+
+end
+alt Entreprise
+create EspaceEntreprise
+Vue-> EspaceEntreprise:Infos Entreprise
+
+end
+end
+@enduml
+
