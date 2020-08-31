@@ -1,0 +1,46 @@
+@startuml
+
+title Classes - Class Diagram
+
+class Utilisateur{
+    int id_Utilisateur
+    String nom_clt
+    String prenom_clt
+    String email
+    String password
+    Date date_creation_compte
+    int creerCompte()
+    int miseajourCompte()
+}
+
+class Panier{
+    int ajouterJeu()
+    int supprimerJeu()
+    void getTotalPanier()
+}
+
+class Jeu{
+    int ref_jeu
+    String designation
+    String description
+    int image
+    int ajouter()
+    int modifer()
+    int supprimer()
+    int getJeu()
+}
+
+class Categorie{
+    int code_categorie
+    String nom_categorie
+}
+
+Categorie "1..1" -- "1.." Jeu
+Panier "" o-- "" Jeu
+Utilisateur "" o-- "" Roles
+(Utilisateur, Jeu) .. Visualisation
+class Visualisation {
+Visualiser()
+Télécharger()
+}
+@enduml
