@@ -1,0 +1,107 @@
+@startuml
+ 
+title Classes - Class Diagram
+
+
+class LoginPage {
+    FormGroup validations_form
+    string errorMessage
+    afstore AngularFirestore
+    AuthenticateService authService
+    UserService userService
+    loginUser(value)
+    goToRegisterPage()
+}
+
+class MainPage {
+    Observable<any[]> listCards
+    UserService userservice
+    editCard(user)
+}
+
+class InfosUserPage {
+    User currentUser
+    User admin
+    UserService userService
+    saveUser()
+}
+
+class Page2 {
+    User currentUser
+    boolean admin
+    UserService userService
+}
+
+class Page3 {
+    boolean connected
+    string firstname
+    UserService userService
+    AuthenticateService authService
+}
+
+
+class RegisterPage {
+    FormGroup validations_form
+    string errorMessage
+    string successMessage
+    tryRegister(value)
+    goLoginPage()
+}
+
+class AuthenticateService {
+    string errorMessage
+    any subscription
+    AngularFireAuth afAuth
+    AngularFirestore afstore
+    UserService userService
+    
+    Promise<any> registerUser(value)
+    Promise<any> loginUser(value)
+    Promise logoutUser()
+    User userDetails()
+}
+
+
+class UserService {
+    User user
+    User editUser
+    AngularFirestoreCollection listCardsCollection
+    
+    setEditUser(user)
+    User getEditUser()
+    setUser(user)
+    User getUser()
+    Observable getUserById()
+    save(currentUser)
+}
+
+Interface User {
+  string uid
+  string email
+  string firstname
+  string lastname
+  string address
+  string tel 
+  string doctor
+  string teldoc
+  string cardiaques
+  string pulmonaires
+  string digestives
+  string nerveuses
+  string endocriniennes
+  boolean isAdmin 
+}
+
+LoginPage "1..1"--"1..1" AuthenticateService
+LoginPage "1..1"--"1..1"RegisterPage
+Page3 "1..1"--"1..1" AuthenticateService
+LoginPage "1..1"--"1..1" UserService
+Page3 "1..1"--"1..1" UserService
+MainPage"1..1"--"1..1" UserService
+Page2"1..1"--"1..1" UserService
+InfosUserPage"1..1"--"1..1" UserService
+AuthenticateService"1..1"--"1..1" UserService
+User--o UserService
+
+ 
+@enduml

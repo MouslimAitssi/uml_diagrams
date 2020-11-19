@@ -1,0 +1,23 @@
+@startuml
+
+title Diagramme de cas d'utilisation pour l'Admin
+
+left to right direction
+skinparam packageStyle rectangle
+
+actor Administrateur
+
+rectangle SteamENSIAS {
+    Administrateur --> (Gérer les comptes)
+    Administrateur --> (Gérer les offres)
+    Administrateur --> (Consulter les réclamations)
+    (Gérer les comptes) <|- (Vérifier les comptes)
+    (Gérer les offres) <|- (Ajouter)
+    (Gérer les offres) <|-- (Modifier)
+    (Gérer les offres) <|-- (Supprimer)
+    (Gérer les comptes) .down.> (S'authentifier) : include
+    (Gérer les offres) .down.> (S'authentifier) : include
+    (Consulter les réclamations) .down.> (S'authentifier) : include
+    
+}
+@enduml
