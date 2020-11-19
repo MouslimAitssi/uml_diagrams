@@ -1,0 +1,29 @@
+@startuml
+
+title Diagramme de cas d'utilisation de mon application
+
+left to right direction
+skinparam packageStyle rectangle
+
+actor Visiteur
+actor Patient
+actor Administrateur
+
+
+
+rectangle MedicalApp {
+    Visiteur --> (Consulter l'accueil)
+    Visiteur --> (S'inscrire)
+    Administrateur --> (Consulter tous les dossiers médicaux)
+    Administrateur --> (Modifier les dossiers médicaux)
+    Patient --> (Consulter son dossier médical)
+    Patient --> (S'authentifier)
+    Patient <|- Administrateur
+    Visiteur <|- Patient
+    (Consulter tous les dossiers médicaux) .down.> (S'authentifier) : include
+    (Modifier les dossiers médicaux) .down.> (S'authentifier) : include
+    (S'authentifier).down.> (S'inscrire) : include
+    (Consulter son dossier médical) .down.> (S'authentifier) : include
+    
+}
+@enduml
